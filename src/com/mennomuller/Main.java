@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         BattleArena arena = new BattleArena();
-        Party heroParty = new Party(TrueProgrammer.createPlayerCharacter());
-        Party evilParty = new Party(new Skeleton());
+        Party heroParty = new Party(false,arena,TrueProgrammer.createPlayerCharacter());
+        Party evilParty = new Party(true,arena,new Skeleton());
         arena.heroParty = heroParty;
         arena.evilParty = evilParty;
         arena.fight();

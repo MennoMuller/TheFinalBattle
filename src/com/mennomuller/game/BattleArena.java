@@ -11,8 +11,8 @@ public class BattleArena {
 
     public void fight(){
         allFighters = new ArrayList<>();
-        allFighters.addAll(heroParty.members);
-        allFighters.addAll(evilParty.members);
+        allFighters.addAll(heroParty.getMembers());
+        allFighters.addAll(evilParty.getMembers());
         while (!heroParty.isDefeated()&&!evilParty.isDefeated()){
             for(Fighter character:allFighters){
                 character.takeTurn();
