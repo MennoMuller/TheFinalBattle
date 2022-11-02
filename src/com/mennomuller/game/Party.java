@@ -9,13 +9,9 @@ public class Party {
     private final ArrayList<Fighter> members;
     public Player player;
 
-    public Party(boolean isComputer, BattleArena arena, Fighter... members) {
+    public Party(Player player, BattleArena arena, Fighter... members) {
         this.members = new ArrayList<>(List.of(members));
-        if (isComputer) {
-            player = new AIPlayer(arena);
-        } else {
-            player = new HumanPlayer(arena);
-        }
+        this.player = player;
         for (Fighter member : members) {
             member.setParty(this);
         }
