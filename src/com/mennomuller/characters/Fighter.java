@@ -31,7 +31,13 @@ public abstract class Fighter {
     }
 
     public ArrayList<Action> getAvailableActions() {
-        return availableActions;
+        ArrayList<Action> currentActions = new ArrayList<>();
+        for (Action action : availableActions) {
+            if (action.isEnabledFor(this)) {
+                currentActions.add(action);
+            }
+        }
+        return currentActions;
     }
 
     public void setParty(Party party) {

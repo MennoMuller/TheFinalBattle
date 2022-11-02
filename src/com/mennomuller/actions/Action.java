@@ -9,10 +9,13 @@ public abstract class Action {
     public final String NAME;
     public final TargetType TARGET_TYPE;
 
-
     protected Action(String NAME, TargetType TARGET_TYPE) {
         this.NAME = NAME;
         this.TARGET_TYPE = TARGET_TYPE;
+    }
+
+    public boolean isEnabledFor(Fighter f) {
+        return true;
     }
 
     public abstract void perform(Fighter user, Fighter... targets);

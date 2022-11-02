@@ -16,4 +16,9 @@ public class UseItem extends Action {
             user.doAction(user.getParty().player.chooseAction(true, user, user.getParty().items));
         }
     }
+
+    @Override
+    public boolean isEnabledFor(Fighter f) {
+        return !f.getParty().items.isEmpty();
+    }
 }
