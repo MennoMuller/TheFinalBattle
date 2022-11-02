@@ -19,6 +19,7 @@ public class HumanPlayer extends Player {
         if (options.size() == 1) {
             return options.get(0);
         } else {
+            arena.displayGameStatus(f);
             System.out.println("\nSelect action for " + f.NAME + ":");
             for (int i = 0; i < options.size(); i++) {
                 System.out.println((i + 1) + ": " + options.get(i).NAME);

@@ -6,7 +6,7 @@ import com.mennomuller.characters.Fighter;
 import java.util.ArrayList;
 
 public abstract class Player {
-    private final BattleArena arena;
+    protected final BattleArena arena;
 
     public Player(BattleArena arena) {
         this.arena = arena;

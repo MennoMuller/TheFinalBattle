@@ -4,6 +4,7 @@ import com.mennomuller.characters.Fighter;
 import com.mennomuller.characters.Skeleton;
 import com.mennomuller.characters.TrueProgrammer;
 import com.mennomuller.characters.UncodedOne;
+import com.mennomuller.util.TextHandler;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class BattleArena {
     private Player heroPlayer;
     private Player evilPlayer;
     ArrayList<Fighter> allFighters;
+    private final int BAR_LENGTH = 46;
 
     public void fight() {
         for (Party evil : evilParties) {
@@ -81,5 +83,25 @@ public class BattleArena {
         addEvilParty(new Skeleton(), new Skeleton());
         addEvilParty(new UncodedOne());
         fight();
+    }
+
+    public void displayGameStatus(Fighter turnTaker) {
+        System.out.println("=".repeat(BAR_LENGTH) + " BATTLE " + "=".repeat(BAR_LENGTH));
+        for (Fighter f : heroParty.getMembers()) {
+            if (f.equals(turnTaker)) {
+                TextHandler.printlnColor(f.toString(), TextHandler.Color.YELLOW);
+            } else {
+                System.out.println(f);
+            }
+        }
+        System.out.println("-".repeat(BAR_LENGTH + 2) + " VS " + "-".repeat(BAR_LENGTH + 2));
+        for (Fighter f : evilParty.getMembers()) {
+            if (f.equals(turnTaker)) {
+                TextHandler.printlnColor(f.toString(), TextHandler.Color.YELLOW);
+            } else {
+                System.out.println(f);
+            }
+        }
+        System.out.println("=".repeat(BAR_LENGTH * 2 + 8));
     }
 }

@@ -69,5 +69,8 @@ public abstract class Fighter {
         return currHP > 0;
     }
 
-
+    @Override
+    public String toString() {
+        return NAME + " (" + currHP + "/" + maxHP + ")";
+    }
 }
