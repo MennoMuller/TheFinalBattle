@@ -38,8 +38,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public Fighter chooseTarget(Party p) {
-        ArrayList<Fighter> options = p.getMembers();
+    public Fighter chooseTarget(ArrayList<Fighter> options) {
         if (options.size() == 1) {
             return options.get(0);
         } else {

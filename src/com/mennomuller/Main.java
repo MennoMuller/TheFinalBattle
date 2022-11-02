@@ -9,10 +9,12 @@ public class Main {
 
     public static void main(String[] args) {
         BattleArena arena = new BattleArena();
-        Party heroParty = new Party(false,arena,TrueProgrammer.createPlayerCharacter());
-        Party evilParty = new Party(true,arena,new Skeleton());
+        Party heroParty = new Party(false, arena, TrueProgrammer.createPlayerCharacter());
         arena.heroParty = heroParty;
-        arena.evilParty = evilParty;
+        Party evilParty = new Party(true, arena, new Skeleton());
+        arena.evilParties.add(evilParty);
+        evilParty = new Party(true, arena, new Skeleton(), new Skeleton());
+        arena.evilParties.add(evilParty);
         arena.fight();
     }
 }

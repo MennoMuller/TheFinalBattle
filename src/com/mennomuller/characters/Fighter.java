@@ -41,7 +41,7 @@ public abstract class Fighter {
 
     public void doAction(Action action) {
         Fighter targetFighter = switch (action.TARGET_TYPE) {
-            case ALLY -> party.player.chooseTarget(party);
+            case ALLY -> party.player.chooseTarget(party.getAliveMembers());
             case ENEMY -> party.player.chooseTarget(party.player.getEnemies(this));
             case NONE -> null;
             case SELF -> this;

@@ -24,8 +24,8 @@ public class AIPlayer extends Player {
     }
 
     @Override
-    public Fighter chooseTarget(Party p) {
-        int choice = random.nextInt(p.getMembers().size());
-        return p.getMembers().get(choice);
+    public Fighter chooseTarget(ArrayList<Fighter> options) {
+        int choice = random.nextInt(options.size());
+        return options.get(choice);
     }
 }

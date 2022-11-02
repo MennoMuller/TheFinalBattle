@@ -33,4 +33,14 @@ public class Party {
         }
         return true;
     }
+
+    public ArrayList<Fighter> getAliveMembers() {
+        ArrayList<Fighter> aliveMembers = new ArrayList<>();
+        for (Fighter member : members) {
+            if (member.isAlive()) {
+                aliveMembers.add(member);
+            }
+        }
+        return aliveMembers;
+    }
 }
