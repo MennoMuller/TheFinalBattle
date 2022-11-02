@@ -14,13 +14,16 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public Action chooseAction(Fighter f) {
-        ArrayList<Action> options = f.getAvailableActions();
-        if (options.size() == 1) {
+    public Action chooseAction(boolean isItem, Fighter f, ArrayList<Action> options) {
+        if (!isItem && options.size() == 1) {
             return options.get(0);
         } else {
             arena.displayGameStatus(f);
-            System.out.println("\nSelect action for " + f.NAME + ":");
+            if (isItem) {
+                System.out.println("\nSelect an item:");
+            } else {
+                System.out.println("\nSelect action for " + f.NAME + ":");
+            }
             for (int i = 0; i < options.size(); i++) {
                 System.out.println((i + 1) + ": " + options.get(i).NAME);
             }
@@ -31,7 +34,7 @@ public class HumanPlayer extends Player {
                     return options.get(choice);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Not a number");
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException e) {
                     System.out.println("Not a valid option");
                 }
             }
@@ -45,7 +48,7 @@ public class HumanPlayer extends Player {
         } else {
             System.out.println("\nSelect Target:");
             for (int i = 0; i < options.size(); i++) {
-                System.out.println((i + 1) + ": " + options.get(i).NAME);
+                System.out.println((i + 1) + ": " + options.get(i));
             }
             int choice;
             while (true) {

@@ -2,6 +2,7 @@ package com.mennomuller.characters;
 
 import com.mennomuller.actions.Action;
 import com.mennomuller.actions.DoNothing;
+import com.mennomuller.actions.UseItem;
 import com.mennomuller.game.Party;
 
 import java.util.ArrayList;
@@ -18,6 +19,15 @@ public abstract class Fighter {
         NAME = name;
         availableActions = new ArrayList<>();
         availableActions.add(new DoNothing());
+        availableActions.add(new UseItem());
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public int getCurrHP() {
+        return currHP;
     }
 
     public ArrayList<Action> getAvailableActions() {
@@ -35,7 +45,7 @@ public abstract class Fighter {
     public void takeTurn() {
         if (isAlive()) {
             System.out.println("It is " + NAME + "'s turn...");
-            doAction(party.player.chooseAction(this));
+            doAction(party.player.chooseAction(false, this, this.getAvailableActions()));
         }
     }
 
@@ -59,6 +69,14 @@ public abstract class Fighter {
         if (currHP == 0) {
             die();
         }
+    }
+
+    public void heal(int healing) {
+        if (currHP + healing > maxHP) {
+            healing = maxHP - currHP;
+        }
+        currHP += healing;
+        System.out.println(NAME + " recovered " + healing + " HP! (" + currHP + "/" + maxHP + " HP)");
     }
 
     public void die() {

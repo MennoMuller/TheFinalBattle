@@ -14,12 +14,20 @@ public class AIPlayer extends Player {
     }
 
     @Override
-    public Action chooseAction(Fighter f) {
-        ArrayList<Action> options = f.getAvailableActions();
+    public Action chooseAction(boolean isItem, Fighter f, ArrayList<Action> options) {
         if (options.size() == 1) {
             return options.get(0);
         }
-        int choice = random.nextInt(options.size() - 1) + 1;
+        int choice;
+        if (isItem) {
+            choice = random.nextInt(options.size());
+        } else {
+            if (!f.getParty().items.isEmpty() && f.getCurrHP() / (double) f.getMaxHP() < 0.5 && random.nextDouble() < 0.25) {
+                choice = 1;
+            } else {
+                choice = random.nextInt(options.size() - 2) + 2;
+            }
+        }
         return options.get(choice);
     }
 

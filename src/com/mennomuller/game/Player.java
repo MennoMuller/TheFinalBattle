@@ -20,7 +20,7 @@ public abstract class Player {
         }
     }
 
-    public abstract Action chooseAction(Fighter f);
+    public abstract Action chooseAction(boolean isItem, Fighter f, ArrayList<Action> options);
 
     public abstract Fighter chooseTarget(ArrayList<Fighter> options);
 }

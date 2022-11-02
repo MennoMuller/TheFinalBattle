@@ -24,6 +24,8 @@ public class BattleArena {
             allFighters = new ArrayList<>();
             allFighters.addAll(heroParty.getMembers());
             allFighters.addAll(evilParty.getMembers());
+            displayGameStatus(allFighters.get(0));
+            System.out.println();
             while (!heroParty.isDefeated() && !evilParty.isDefeated()) {
                 for (Fighter character : allFighters) {
                     character.takeTurn();
@@ -42,11 +44,11 @@ public class BattleArena {
     }
 
     public void setHeroParty(Fighter... members) {
-        heroParty = new Party(heroPlayer, this, members);
+        heroParty = new Party(heroPlayer, members);
     }
 
     public void addEvilParty(Fighter... members) {
-        evilParties.add(new Party(evilPlayer, this, members));
+        evilParties.add(new Party(evilPlayer, members));
     }
 
     public void askGameMode() {
@@ -79,9 +81,13 @@ public class BattleArena {
     public void setupGame() {
         askGameMode();
         setHeroParty(TrueProgrammer.createPlayerCharacter());
+        heroParty.addPotions(3);
         addEvilParty(new Skeleton());
+        evilParties.get(0).addPotions(1);
         addEvilParty(new Skeleton(), new Skeleton());
+        evilParties.get(1).addPotions(1);
         addEvilParty(new UncodedOne());
+        evilParties.get(2).addPotions(1);
         fight();
     }
 
