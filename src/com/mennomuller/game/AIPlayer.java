@@ -1,5 +1,6 @@
 package com.mennomuller.game;
 
+import com.mennomuller.actions.Action;
 import com.mennomuller.characters.Fighter;
 
 import java.util.ArrayList;
@@ -13,12 +14,12 @@ public class AIPlayer extends Player {
     }
 
     @Override
-    public Fighter.Action chooseAction(Fighter f) {
-        ArrayList<Fighter.Action> options = f.getAvailableActions();
-        if(options.size()==1){
-            return Fighter.Action.DO_NOTHING;
+    public Action chooseAction(Fighter f) {
+        ArrayList<Action> options = f.getAvailableActions();
+        if (options.size() == 1) {
+            return options.get(0);
         }
-        int choice = random.nextInt(options.size()-1)+1;
+        int choice = random.nextInt(options.size() - 1) + 1;
         return options.get(choice);
     }
 

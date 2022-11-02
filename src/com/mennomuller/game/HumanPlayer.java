@@ -1,5 +1,6 @@
 package com.mennomuller.game;
 
+import com.mennomuller.actions.Action;
 import com.mennomuller.characters.Fighter;
 
 import java.util.ArrayList;
@@ -13,14 +14,14 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public Fighter.Action chooseAction(Fighter f) {
-        ArrayList<Fighter.Action> options = f.getAvailableActions();
+    public Action chooseAction(Fighter f) {
+        ArrayList<Action> options = f.getAvailableActions();
         if (options.size() == 1) {
             return options.get(0);
         } else {
-            System.out.println("\nSelect action for "+f.NAME+":");
+            System.out.println("\nSelect action for " + f.NAME + ":");
             for (int i = 0; i < options.size(); i++) {
-                System.out.println((i + 1) + ": " + options.get(i).name().replace('_', ' '));
+                System.out.println((i + 1) + ": " + options.get(i).NAME);
             }
             int choice;
             while (true) {
