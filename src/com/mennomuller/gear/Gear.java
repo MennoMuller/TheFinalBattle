@@ -1,4 +1,6 @@
 package com.mennomuller.gear;
 
-public abstract class Gear {
+import com.mennomuller.actions.Action;
+
+public record Gear(String name, Action action) {
 }

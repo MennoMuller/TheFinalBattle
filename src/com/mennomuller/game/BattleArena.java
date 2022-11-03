@@ -1,9 +1,12 @@
 package com.mennomuller.game;
 
+import com.mennomuller.actions.Slash;
+import com.mennomuller.actions.Stab;
 import com.mennomuller.characters.Fighter;
 import com.mennomuller.characters.Skeleton;
 import com.mennomuller.characters.TrueProgrammer;
 import com.mennomuller.characters.UncodedOne;
+import com.mennomuller.gear.Gear;
 import com.mennomuller.util.TextHandler;
 
 import java.util.ArrayList;
@@ -82,10 +85,13 @@ public class BattleArena {
         askGameMode();
         setHeroParty(TrueProgrammer.createPlayerCharacter());
         heroParty.addPotions(3);
+        heroParty.getMembers().get(0).equip(new Gear("Sword", new Slash()));
         addEvilParty(new Skeleton());
+        evilParties.get(0).getMembers().get(0).equip(new Gear("Dagger", new Stab()));
         evilParties.get(0).addPotions(1);
         addEvilParty(new Skeleton(), new Skeleton());
         evilParties.get(1).addPotions(1);
+        evilParties.get(1).addGear(new Gear("Dagger", new Stab()), new Gear("Dagger", new Stab()));
         addEvilParty(new UncodedOne());
         evilParties.get(2).addPotions(1);
         fight();

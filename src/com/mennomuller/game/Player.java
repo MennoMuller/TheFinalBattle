@@ -2,6 +2,7 @@ package com.mennomuller.game;
 
 import com.mennomuller.actions.Action;
 import com.mennomuller.characters.Fighter;
+import com.mennomuller.gear.Gear;
 
 import java.util.ArrayList;
 
@@ -23,4 +24,6 @@ public abstract class Player {
     public abstract Action chooseAction(boolean isItem, Fighter f, ArrayList<Action> options);
 
     public abstract Fighter chooseTarget(ArrayList<Fighter> options);
+
+    public abstract Gear chooseGear(Fighter f);
 }

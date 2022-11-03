@@ -2,6 +2,7 @@ package com.mennomuller.game;
 
 import com.mennomuller.actions.Action;
 import com.mennomuller.characters.Fighter;
+import com.mennomuller.gear.Gear;
 import com.mennomuller.items.HealthPotion;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 public class Party {
     private final ArrayList<Fighter> members;
     public final ArrayList<Action> items = new ArrayList<>();
+    public final ArrayList<Gear> unusedGear = new ArrayList<>();
     public Player player;
 
     public Party(Player player, Fighter... members) {
@@ -47,5 +49,9 @@ public class Party {
         for (int i = 0; i < number; i++) {
             items.add(new HealthPotion());
         }
+    }
+
+    public void addGear(Gear... gear) {
+        unusedGear.addAll(List.of(gear));
     }
 }

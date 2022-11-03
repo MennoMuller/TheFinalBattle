@@ -2,6 +2,7 @@ package com.mennomuller.game;
 
 import com.mennomuller.actions.Action;
 import com.mennomuller.characters.Fighter;
+import com.mennomuller.gear.Gear;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -62,5 +63,10 @@ public class HumanPlayer extends Player {
                 }
             }
         }
+    }
+
+    @Override
+    public Gear chooseGear(Fighter f) {
+        return f.getParty().unusedGear.get(0);
     }
 }

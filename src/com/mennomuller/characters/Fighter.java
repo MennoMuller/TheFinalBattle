@@ -2,8 +2,11 @@ package com.mennomuller.characters;
 
 import com.mennomuller.actions.Action;
 import com.mennomuller.actions.DoNothing;
+import com.mennomuller.actions.EquipGear;
 import com.mennomuller.actions.UseItem;
 import com.mennomuller.game.Party;
+import com.mennomuller.gear.Gear;
+import com.mennomuller.util.TextHandler;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,12 +17,14 @@ public abstract class Fighter {
     private Party party;
     protected ArrayList<Action> availableActions;
     protected int maxHP, currHP;
+    private Gear equipment;
 
     protected Fighter(String name) {
         NAME = name;
         availableActions = new ArrayList<>();
         availableActions.add(new DoNothing());
         availableActions.add(new UseItem());
+        availableActions.add(new EquipGear());
     }
 
     public int getMaxHP() {
@@ -38,6 +43,25 @@ public abstract class Fighter {
             }
         }
         return currentActions;
+    }
+
+    public Gear getEquipment() {
+        return equipment;
+    }
+
+    public void unequipGear() {
+        party.unusedGear.add(equipment);
+        availableActions.remove(equipment.action());
+        equipment = null;
+    }
+
+    public void equip(Gear gear) {
+        if (equipment != null) {
+            unequipGear();
+        }
+        equipment = gear;
+        availableActions.add(equipment.action());
+        party.unusedGear.remove(gear);
     }
 
     public void setParty(Party party) {
@@ -95,6 +119,8 @@ public abstract class Fighter {
 
     @Override
     public String toString() {
-        return NAME + " (" + currHP + "/" + maxHP + ")";
+
+        return (isAlive() ? "" : TextHandler.ANSI_GRAY) + NAME + " (" + currHP + "/" + maxHP + ")" + (equipment == null ? "" : " (" + equipment.name() + ")" + TextHandler.ANSI_RESET);
+
     }
 }
