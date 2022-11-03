@@ -1,12 +1,8 @@
 package com.mennomuller.game;
 
 import com.mennomuller.actions.Action;
-import com.mennomuller.actions.Slash;
-import com.mennomuller.actions.Stab;
-import com.mennomuller.characters.Fighter;
-import com.mennomuller.characters.Skeleton;
-import com.mennomuller.characters.TrueProgrammer;
-import com.mennomuller.characters.UncodedOne;
+import com.mennomuller.actions.Attack;
+import com.mennomuller.characters.*;
 import com.mennomuller.gear.Gear;
 import com.mennomuller.util.TextHandler;
 
@@ -113,19 +109,18 @@ public class BattleArena {
     public void setupGame() {
 
         if (analysisMode) {
-            setHeroParty(new TrueProgrammer("TRUE PROGRAMMER"));
+            setHeroParty(new TrueProgrammer("TRUE PROGRAMMER"), new VinFletcher());
         } else {
-            setHeroParty(TrueProgrammer.createPlayerCharacter());
+            setHeroParty(TrueProgrammer.createPlayerCharacter(), new VinFletcher());
         }
         heroParty.addPotions(3);
-        heroParty.getMembers().get(0).equip(new Gear("Sword", new Slash()));
         evilParties.clear();
         addEvilParty(new Skeleton());
-        evilParties.get(0).getMembers().get(0).equip(new Gear("Dagger", new Stab()));
+        evilParties.get(0).getMembers().get(0).equip(new Gear("Dagger", Attack.stab()));
         evilParties.get(0).addPotions(1);
         addEvilParty(new Skeleton(), new Skeleton());
         evilParties.get(1).addPotions(1);
-        evilParties.get(1).addGear(new Gear("Dagger", new Stab()), new Gear("Dagger", new Stab()));
+        evilParties.get(1).addGear(new Gear("Dagger", Attack.stab()), new Gear("Dagger", Attack.stab()));
         addEvilParty(new UncodedOne());
         evilParties.get(2).addPotions(1);
         fight();

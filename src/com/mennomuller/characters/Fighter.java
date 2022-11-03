@@ -61,7 +61,9 @@ public abstract class Fighter {
         }
         equipment = gear;
         availableActions.add(equipment.action());
-        party.unusedGear.remove(gear);
+        if (party != null) {
+            party.unusedGear.remove(gear);
+        }
     }
 
     public void setParty(Party party) {
@@ -73,7 +75,7 @@ public abstract class Fighter {
     }
 
     public void takeTurn() {
-        if (isAlive()) {
+        if (isAlive() && party.player.getEnemies(this).size() != 0) {
             if (!party.player.getArena().inAnalysisMode()) {
                 System.out.println("\nIt is " + NAME + "'s turn...");
             }

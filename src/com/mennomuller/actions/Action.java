@@ -20,6 +20,12 @@ public abstract class Action {
 
     public abstract void perform(Fighter user, Fighter... targets);
 
+    public void printMsg(String msg, Fighter user) {
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(msg);
+        }
+    }
+
     public enum TargetType {
         SELF,
         ALLY,

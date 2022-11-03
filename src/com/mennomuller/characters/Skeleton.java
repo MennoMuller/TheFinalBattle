@@ -1,11 +1,11 @@
 package com.mennomuller.characters;
 
-import com.mennomuller.actions.BoneCrunch;
+import com.mennomuller.actions.Attack;
 
 public class Skeleton extends Fighter {
     public Skeleton() {
         super("SKELETON");
-        availableActions.add(new BoneCrunch());
+        availableActions.add(Attack.boneCrunch());
         maxHP = 5;
         currHP = maxHP;
     }

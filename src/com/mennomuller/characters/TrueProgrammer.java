@@ -1,15 +1,17 @@
 package com.mennomuller.characters;
 
-import com.mennomuller.actions.Punch;
+import com.mennomuller.actions.Attack;
+import com.mennomuller.gear.Gear;
 
 import java.util.Scanner;
 
 public class TrueProgrammer extends Fighter {
     public TrueProgrammer(String name) {
         super(name);
-        availableActions.add(new Punch());
+        availableActions.add(Attack.punch());
         maxHP = 25;
         currHP = maxHP;
+        equip(new Gear("Sword", Attack.slash()));
     }
 
     public static TrueProgrammer createPlayerCharacter() {

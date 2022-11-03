@@ -1,11 +1,11 @@
 package com.mennomuller.characters;
 
-import com.mennomuller.actions.Unravel;
+import com.mennomuller.actions.Attack;
 
 public class UncodedOne extends Fighter {
     public UncodedOne() {
         super("The UNCODED ONE");
-        availableActions.add(new Unravel());
+        availableActions.add(Attack.unravel());
         maxHP = 15;
         currHP = maxHP;
     }
