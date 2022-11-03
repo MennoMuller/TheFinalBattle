@@ -26,4 +26,8 @@ public abstract class Player {
     public abstract Fighter chooseTarget(ArrayList<Fighter> options);
 
     public abstract Gear chooseGear(Fighter f);
+
+    public BattleArena getArena() {
+        return arena;
+    }
 }

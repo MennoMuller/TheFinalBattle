@@ -6,6 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
         BattleArena arena = new BattleArena();
-        arena.setupGame();
+        arena.startUp();
     }
 }

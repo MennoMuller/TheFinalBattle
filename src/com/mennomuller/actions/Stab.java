@@ -10,7 +10,9 @@ public class Stab extends Action {
     @Override
     public void perform(Fighter user, Fighter... targets) {
         Fighter target = targets[0];
-        System.out.println(user.NAME + " STABBED " + target.NAME + " with their DAGGER.");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " STABBED " + target.NAME + " with their DAGGER.");
+        }
         target.takeDamage(1);
     }
 

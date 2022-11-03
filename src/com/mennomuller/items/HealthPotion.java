@@ -10,7 +10,9 @@ public class HealthPotion extends Consumable {
 
     @Override
     public void perform(Fighter user, Fighter... targets) {
-        System.out.println(user.NAME + " used a HEALTH POTION.");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " used a HEALTH POTION.");
+        }
         user.heal(10);
         user.getParty().items.remove(this);
     }

@@ -12,7 +12,9 @@ public class EquipGear extends Action {
     public void perform(Fighter user, Fighter... targets) {
         Gear selection = user.getParty().player.chooseGear(user);
         user.equip(selection);
-        System.out.println(user.NAME + " equipped " + selection.name().toUpperCase() + ".");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " equipped " + selection.name().toUpperCase() + ".");
+        }
     }
 
     @Override

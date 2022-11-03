@@ -22,9 +22,9 @@ public class HumanPlayer extends Player {
         } else {
             arena.displayGameStatus(f);
             if (isItem) {
-                System.out.println("\nSelect an item:");
+                System.out.println("Select an item:");
             } else {
-                System.out.println("\nSelect action for " + f.NAME + ":");
+                System.out.println("Select action for " + f.NAME + ":");
             }
             for (int i = 0; i < options.size(); i++) {
                 System.out.println((i + 1) + ": " + options.get(i).NAME);

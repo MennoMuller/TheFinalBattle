@@ -9,6 +9,8 @@ public class DoNothing extends Action {
 
     @Override
     public void perform(Fighter user, Fighter... targets) {
-        System.out.println(user.NAME + " did NOTHING.");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " did NOTHING.");
+        }
     }
 }

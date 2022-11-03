@@ -74,7 +74,9 @@ public abstract class Fighter {
 
     public void takeTurn() {
         if (isAlive()) {
-            System.out.println("It is " + NAME + "'s turn...");
+            if (!party.player.getArena().inAnalysisMode()) {
+                System.out.println("\nIt is " + NAME + "'s turn...");
+            }
             doAction(party.player.chooseAction(false, this, this.getAvailableActions()));
         }
     }
@@ -95,7 +97,9 @@ public abstract class Fighter {
             damage = currHP;
         }
         currHP -= damage;
-        System.out.println(NAME + " took " + damage + " damage! (" + currHP + "/" + maxHP + " HP)");
+        if (!party.player.getArena().inAnalysisMode()) {
+            System.out.println(NAME + " took " + damage + " damage! (" + currHP + "/" + maxHP + " HP)");
+        }
         if (currHP == 0) {
             die();
         }
@@ -106,14 +110,20 @@ public abstract class Fighter {
             healing = maxHP - currHP;
         }
         currHP += healing;
-        System.out.println(NAME + " recovered " + healing + " HP! (" + currHP + "/" + maxHP + " HP)");
+        if (!party.player.getArena().inAnalysisMode()) {
+            System.out.println(NAME + " recovered " + healing + " HP! (" + currHP + "/" + maxHP + " HP)");
+        }
     }
 
     public void die() {
-        System.out.println(NAME + " died!");
+        if (!party.player.getArena().inAnalysisMode()) {
+            System.out.println(NAME + " died!");
+        }
         if (equipment != null) {
             party.player.getEnemies(this).get(0).getParty().addGear(equipment);
-            System.out.println("Got a " + equipment.name() + "!");
+            if (!party.player.getArena().inAnalysisMode()) {
+                System.out.println("Got a " + equipment.name() + "!");
+            }
             equipment = null;
         }
     }

@@ -10,7 +10,9 @@ public class BoneCrunch extends Action {
     @Override
     public void perform(Fighter user, Fighter... targets) {
         Fighter target = targets[0];
-        System.out.println(user.NAME + " used BONE CRUNCH on " + target.NAME + ".");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " used BONE CRUNCH on " + target.NAME + ".");
+        }
         target.takeDamage(random.nextInt(2));
     }
 

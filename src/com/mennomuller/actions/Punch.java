@@ -10,7 +10,9 @@ public class Punch extends Action {
     @Override
     public void perform(Fighter user, Fighter... targets) {
         Fighter target = targets[0];
-        System.out.println(user.NAME + " PUNCHED " + target.NAME + " with their fists.");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " PUNCHED " + target.NAME + " with their fists.");
+        }
         target.takeDamage(1);
     }
 

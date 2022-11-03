@@ -10,7 +10,9 @@ public class Slash extends Action {
     @Override
     public void perform(Fighter user, Fighter... targets) {
         Fighter target = targets[0];
-        System.out.println(user.NAME + " SLASHED " + target.NAME + " with their SWORD.");
+        if (!user.getParty().player.getArena().inAnalysisMode()) {
+            System.out.println(user.NAME + " SLASHED " + target.NAME + " with their SWORD.");
+        }
         target.takeDamage(2);
     }
 }

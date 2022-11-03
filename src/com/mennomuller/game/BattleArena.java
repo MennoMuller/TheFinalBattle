@@ -22,7 +22,7 @@ public class BattleArena {
     private Player evilPlayer;
     private boolean analysisMode = false;
     ArrayList<Fighter> allFighters;
-    private final int BAR_LENGTH = 46;
+    private final int BAR_LENGTH = 46, ANALYSIS_COUNT = 10000;
     private int gameCount = 0, loseCount = 0, winCount = 0;
 
     public void fight() {
@@ -33,11 +33,9 @@ public class BattleArena {
             allFighters.addAll(heroParty.getMembers());
             allFighters.addAll(evilParty.getMembers());
             displayGameStatus(allFighters.get(0));
-            System.out.println();
             while (!heroParty.isDefeated() && !evilParty.isDefeated()) {
                 for (Fighter character : allFighters) {
                     character.takeTurn();
-                    System.out.println();
                     if (!analysisMode) {
                         try {
                             Thread.sleep(500);
@@ -54,11 +52,15 @@ public class BattleArena {
                 return;
             } else {
                 for (Action item : evilParty.items) {
-                    System.out.println("Got a " + item.NAME + "!");
+                    if (!analysisMode) {
+                        System.out.println("Got a " + item.NAME + "!");
+                    }
                     heroParty.addItems(item);
                 }
                 for (Gear item : evilParty.unusedGear) {
-                    System.out.println("Got a " + item.name() + "!");
+                    if (!analysisMode) {
+                        System.out.println("Got a " + item.name() + "!");
+                    }
                     heroParty.addGear(item);
                 }
             }
@@ -75,38 +77,41 @@ public class BattleArena {
     }
 
     public void askGameMode() {
-        if (!analysisMode) {
-            Scanner input = new Scanner(System.in);
-            System.out.println("1 - Player vs Computer\n2 - Player vs Player\n3 - Computer vs Computer\n" + TextHandler.color("4 - Game Balance Analysis", TextHandler.Color.GRAY));
-            int choice;
-            while (true) {
-                try {
-                    System.out.print("Please select a game mode: ");
-                    choice = input.nextInt();
-                    if (choice >= 1 && choice <= 4) {
-                        heroPlayer = switch (choice) {
-                            case 1, 2 -> new HumanPlayer(this);
-                            default -> new AIPlayer(this);
-                        };
-                        evilPlayer = switch (choice) {
-                            case 1, 3, 4 -> new AIPlayer(this);
-                            default -> new HumanPlayer(this);
-                        };
-                        analysisMode = choice == 4;
-                        break;
-                    } else {
-                        System.out.println("Not a valid option.");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Not a number");
-                    input.next();
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("1 - Player vs Computer\n2 - Player vs Player\n3 - Computer vs Computer\n" + TextHandler.color("4 - Game Balance Analysis", TextHandler.Color.GRAY));
+        int choice;
+        while (true) {
+            try {
+                System.out.print("Please select a game mode: ");
+                choice = input.nextInt();
+                if (choice >= 1 && choice <= 4) {
+                    heroPlayer = switch (choice) {
+                        case 1, 2 -> new HumanPlayer(this);
+                        default -> new AIPlayer(this);
+                    };
+                    evilPlayer = switch (choice) {
+                        case 1, 3, 4 -> new AIPlayer(this);
+                        default -> new HumanPlayer(this);
+                    };
+                    analysisMode = choice == 4;
+                    break;
+                } else {
+                    System.out.println("Not a valid option.");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Not a number");
+                input.next();
             }
         }
     }
 
+    public boolean inAnalysisMode() {
+        return analysisMode;
+    }
+
     public void setupGame() {
-        askGameMode();
+
         if (analysisMode) {
             setHeroParty(new TrueProgrammer("TRUE PROGRAMMER"));
         } else {
@@ -124,34 +129,43 @@ public class BattleArena {
         addEvilParty(new UncodedOne());
         evilParties.get(2).addPotions(1);
         fight();
+
+    }
+
+    public void startUp() {
+        askGameMode();
         if (analysisMode) {
-            if (gameCount < 100) {
+            for (int i = 0; i < ANALYSIS_COUNT; i++) {
                 setupGame();
-            } else {
-                System.out.println(gameCount + " games played");
-                System.out.println(winCount + " won");
-                System.out.println(loseCount + " lost");
             }
+            System.out.println(gameCount + " games played");
+            System.out.println(winCount + " won");
+            System.out.println(loseCount + " lost");
+            System.out.println((winCount / (double) gameCount) * 100 + "% victory");
+        } else {
+            setupGame();
         }
     }
 
     public void displayGameStatus(Fighter turnTaker) {
-        System.out.println("=".repeat(BAR_LENGTH) + " BATTLE " + "=".repeat(BAR_LENGTH));
-        for (Fighter f : heroParty.getMembers()) {
-            if (f.equals(turnTaker)) {
-                TextHandler.printlnColor(f.toString(), TextHandler.Color.YELLOW);
-            } else {
-                System.out.println(f);
+        if (!analysisMode) {
+            System.out.println("=".repeat(BAR_LENGTH) + " BATTLE " + "=".repeat(BAR_LENGTH));
+            for (Fighter f : heroParty.getMembers()) {
+                if (f.equals(turnTaker)) {
+                    TextHandler.printlnColor(f.toString(), TextHandler.Color.YELLOW);
+                } else {
+                    System.out.println(f);
+                }
             }
-        }
-        System.out.println("-".repeat(BAR_LENGTH + 2) + " VS " + "-".repeat(BAR_LENGTH + 2));
-        for (Fighter f : evilParty.getMembers()) {
-            if (f.equals(turnTaker)) {
-                TextHandler.printlnColor(f.toString(), TextHandler.Color.YELLOW);
-            } else {
-                System.out.println(f);
+            System.out.println("-".repeat(BAR_LENGTH + 2) + " VS " + "-".repeat(BAR_LENGTH + 2));
+            for (Fighter f : evilParty.getMembers()) {
+                if (f.equals(turnTaker)) {
+                    TextHandler.printlnColor(f.toString(), TextHandler.Color.YELLOW);
+                } else {
+                    System.out.println(f);
+                }
             }
+            System.out.println("=".repeat(BAR_LENGTH * 2 + 8) + "\n");
         }
-        System.out.println("=".repeat(BAR_LENGTH * 2 + 8));
     }
 }
