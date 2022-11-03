@@ -1,9 +1,6 @@
 package com.mennomuller.characters;
 
-import com.mennomuller.actions.Action;
-import com.mennomuller.actions.DoNothing;
-import com.mennomuller.actions.EquipGear;
-import com.mennomuller.actions.UseItem;
+import com.mennomuller.actions.*;
 import com.mennomuller.game.DefenseModifier;
 import com.mennomuller.game.Party;
 import com.mennomuller.gear.Gear;
@@ -95,9 +92,12 @@ public abstract class Fighter {
         action.perform(this, targetFighter);
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(int damage, Attack.DamageType type) {
         if (defenseModifier != null) {
-            damage = defenseModifier.processDamage(damage, !party.player.getArena().inAnalysisMode());
+            damage = defenseModifier.processDamage(damage, type, !party.player.getArena().inAnalysisMode());
+        }
+        if (damage < 0) {
+            damage = 0;
         }
         if (currHP - damage < 0) {
             damage = currHP;

@@ -7,7 +7,7 @@ public class StoneAmarok extends Fighter {
     public StoneAmarok() {
         super("STONE AMAROK");
         availableActions.add(Attack.bite());
-        defenseModifier = new DefenseModifier("STONE ARMOR", 1);
+        defenseModifier = new DefenseModifier("STONE ARMOR", 1, null);
         maxHP = 4;
         currHP = maxHP;
     }
