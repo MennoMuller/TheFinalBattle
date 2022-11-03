@@ -91,7 +91,6 @@ public abstract class Fighter {
             case SELF -> this;
         };
         action.perform(this, targetFighter);
-
     }
 
     public void takeDamage(int damage) {
