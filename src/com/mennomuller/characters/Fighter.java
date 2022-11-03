@@ -4,6 +4,7 @@ import com.mennomuller.actions.Action;
 import com.mennomuller.actions.DoNothing;
 import com.mennomuller.actions.EquipGear;
 import com.mennomuller.actions.UseItem;
+import com.mennomuller.game.DefenseModifier;
 import com.mennomuller.game.Party;
 import com.mennomuller.gear.Gear;
 import com.mennomuller.util.TextHandler;
@@ -18,6 +19,7 @@ public abstract class Fighter {
     protected ArrayList<Action> availableActions;
     protected int maxHP, currHP;
     private Gear equipment;
+    protected DefenseModifier defenseModifier;
 
     protected Fighter(String name) {
         NAME = name;
@@ -94,6 +96,9 @@ public abstract class Fighter {
     }
 
     public void takeDamage(int damage) {
+        if (defenseModifier != null) {
+            damage = defenseModifier.processDamage(damage, !party.player.getArena().inAnalysisMode());
+        }
         if (currHP - damage < 0) {
             damage = currHP;
         }

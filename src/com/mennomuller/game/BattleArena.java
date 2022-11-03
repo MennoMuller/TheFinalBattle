@@ -121,8 +121,10 @@ public class BattleArena {
         addEvilParty(new Skeleton(), new Skeleton());
         evilParties.get(1).addPotions(1);
         evilParties.get(1).addGear(new Gear("Dagger", Attack.stab()), new Gear("Dagger", Attack.stab()));
-        addEvilParty(new UncodedOne());
+        addEvilParty(new StoneAmarok(), new StoneAmarok());
         evilParties.get(2).addPotions(1);
+        addEvilParty(new UncodedOne());
+        evilParties.get(3).addPotions(1);
         fight();
 
     }

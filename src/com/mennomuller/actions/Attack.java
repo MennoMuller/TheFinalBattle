@@ -32,6 +32,10 @@ public class Attack extends Action {
         return new Attack("PUNCH", " PUNCHED ", " with their fists.", 1, 1, 1.0);
     }
 
+    public static Attack bite() {
+        return new Attack("BITE", " BIT ", " with its fangs.", 1, 1, 1.0);
+    }
+
     public static Attack slash() {
         return new Attack("SLASH", " SLASHED ", " with their SWORD.", 2, 2, 1.0);
     }
