@@ -111,6 +111,11 @@ public abstract class Fighter {
 
     public void die() {
         System.out.println(NAME + " died!");
+        if (equipment != null) {
+            party.player.getEnemies(this).get(0).getParty().addGear(equipment);
+            System.out.println("Got a " + equipment.name() + "!");
+            equipment = null;
+        }
     }
 
     public boolean isAlive() {
@@ -120,7 +125,7 @@ public abstract class Fighter {
     @Override
     public String toString() {
 
-        return (isAlive() ? "" : TextHandler.ANSI_GRAY) + NAME + " (" + currHP + "/" + maxHP + ")" + (equipment == null ? "" : " (" + equipment.name() + ")" + TextHandler.ANSI_RESET);
+        return (isAlive() ? "" : TextHandler.ANSI_GRAY) + NAME + " (" + currHP + "/" + maxHP + ")" + (equipment == null ? "" : " (" + equipment.name() + ")") + TextHandler.ANSI_RESET;
 
     }
 }

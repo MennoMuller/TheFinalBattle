@@ -51,6 +51,10 @@ public class Party {
         }
     }
 
+    public void addItems(Action... stuff) {
+        items.addAll(List.of(stuff));
+    }
+
     public void addGear(Gear... gear) {
         unusedGear.addAll(List.of(gear));
     }

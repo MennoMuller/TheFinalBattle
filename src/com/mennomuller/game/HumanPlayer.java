@@ -5,6 +5,7 @@ import com.mennomuller.characters.Fighter;
 import com.mennomuller.gear.Gear;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HumanPlayer extends Player {
@@ -33,8 +34,9 @@ public class HumanPlayer extends Player {
                 try {
                     choice = input.nextInt() - 1;
                     return options.get(choice);
-                } catch (IllegalArgumentException e) {
+                } catch (InputMismatchException e) {
                     System.out.println("Not a number");
+                    input.next();
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Not a valid option");
                 }
@@ -56,9 +58,10 @@ public class HumanPlayer extends Player {
                 try {
                     choice = input.nextInt() - 1;
                     return options.get(choice);
-                } catch (IllegalArgumentException e) {
+                } catch (InputMismatchException e) {
                     System.out.println("Not a number");
-                } catch (ArrayIndexOutOfBoundsException e) {
+                    input.next();
+                } catch (IndexOutOfBoundsException e) {
                     System.out.println("Not a valid option");
                 }
             }

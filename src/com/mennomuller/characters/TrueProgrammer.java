@@ -5,7 +5,7 @@ import com.mennomuller.actions.Punch;
 import java.util.Scanner;
 
 public class TrueProgrammer extends Fighter {
-    protected TrueProgrammer(String name) {
+    public TrueProgrammer(String name) {
         super(name);
         availableActions.add(new Punch());
         maxHP = 25;
