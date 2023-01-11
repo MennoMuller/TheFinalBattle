@@ -6,7 +6,7 @@ public class UncodedOne extends Fighter {
     public UncodedOne() {
         super("The UNCODED ONE");
         availableActions.add(Attack.unravel());
-        maxHP = 15;
+        maxHP = 50;
         currHP = maxHP;
     }
 }

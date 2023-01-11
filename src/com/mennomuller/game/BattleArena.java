@@ -109,10 +109,11 @@ public class BattleArena {
     public void setupGame() {
 
         if (analysisMode) {
-            setHeroParty(new TrueProgrammer("TRUE PROGRAMMER"), new VinFletcher());
+            setHeroParty(new TrueProgrammer("TRUE PROGRAMMER"));
         } else {
-            setHeroParty(TrueProgrammer.createPlayerCharacter(), new VinFletcher());
+            setHeroParty(TrueProgrammer.createPlayerCharacter());
         }
+        heroParty.addMembers(new VinFletcher(), new Skorin());
         heroParty.addPotions(3);
         evilParties.clear();
         addEvilParty(new Skeleton());

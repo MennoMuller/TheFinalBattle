@@ -6,7 +6,7 @@ public class Skeleton extends Fighter {
     public Skeleton() {
         super("SKELETON");
         availableActions.add(Attack.boneCrunch());
-        maxHP = 5;
+        maxHP = 15;
         currHP = maxHP;
     }
 }

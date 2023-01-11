@@ -21,6 +21,10 @@ public class Attack extends Action {
 
     @Override
     public void perform(Fighter user, Fighter... targets) {
+        perform(message1, minDmg, maxDmg, type, user, targets);
+    }
+
+    public void perform(String message1, int minDmg, int maxDmg, DamageType type, Fighter user, Fighter... targets) {
         Fighter target = targets[0];
         printMsg(user.NAME + message1 + target.NAME + message2, user);
         if (random.nextDouble() < hitRate) {
@@ -47,7 +51,7 @@ public class Attack extends Action {
     }
 
     public static Attack stab() {
-        return new Attack("STAB", " STABBED ", " with their DAGGER.", 1, 1, 1.0, DamageType.PHYSICAL);
+        return new Attack("STAB", " STABBED ", " with their DAGGER.", 2, 2, 1.0, DamageType.PHYSICAL);
     }
 
     public static Attack unravel() {
@@ -60,6 +64,9 @@ public class Attack extends Action {
 
     public enum DamageType {
         PHYSICAL,
-        DECODING
+        DECODING,
+        FIRE,
+        ELECTRIC,
+        ELECTRIC_FIRE
     }
 }

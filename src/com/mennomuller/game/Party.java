@@ -58,4 +58,11 @@ public class Party {
     public void addGear(Gear... gear) {
         unusedGear.addAll(List.of(gear));
     }
+
+    public void addMembers(Fighter... newMembers) {
+        members.addAll(List.of(newMembers));
+        for (Fighter member : newMembers) {
+            member.setParty(this);
+        }
+    }
 }
